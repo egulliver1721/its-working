@@ -1,9 +1,58 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const VanDetails = () => {
-  const params = useParams();
-  const [van, setVan] = useState(null);
+const instance = axios.create({
+  baseURL: "http://localhost:8000",
+  withCredentials: true,
+});
 
-  useEffect(() => {});
+type Vans = {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  type: string;
 };
+
+const VanDetails = () => {
+  const { id } = useParams<Vans>();
+  const [van, setVan] = useState<Vans>({
+    id: "",
+    name: "",
+    description: "",
+    price: "",
+    type: "",
+  });
+
+  useEffect(() => {
+    instance
+      .get(`api/vans/${id}`)
+      .then((response) => {
+        setVan(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
+  return (
+    <div className="van-detail-container">
+      {van ? (
+        <div className="van-detail">
+          <i className={`van-type ${van.type} selected`}>{van.type}</i>
+          <h2>{van.name}</h2>
+          <p className="van-price">
+            <span>${van.price}</span>/day
+          </p>
+          <p>{van.description}</p>
+          <button className="link-button">Rent this van</button>
+        </div>
+      ) : (
+        <h2>Loading...</h2>
+      )}
+    </div>
+  );
+};
+
+export default VanDetails;
