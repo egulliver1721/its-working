@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000",
@@ -16,6 +16,11 @@ type Van = {
 };
 
 const HostVanDetails = () => {
+  const activeStyle: React.CSSProperties = {
+    fontWeight: "bold",
+    textDecoration: "underline",
+    color: "#161616",
+  };
   const { id } = useParams();
   const [currentVan, setCurrentVan] = useState<Van>({
     id: 0,
@@ -57,6 +62,47 @@ const HostVanDetails = () => {
             <h4>${currentVan.price}/day</h4>
           </div>
         </div>
+
+        <nav className="host-van-detail-nav">
+          <NavLink
+            end
+            to="."
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
+          >
+            Details
+          </NavLink>
+          <NavLink
+            to="pricing"
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
+          >
+            Pricing
+          </NavLink>
+          <NavLink
+            to="photos"
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
+          >
+            Photos
+          </NavLink>
+        </nav>
+        <Outlet context={{ currentVan }} />
       </div>
     </section>
   );
