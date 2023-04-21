@@ -8,6 +8,7 @@ async function createVan() {
       price: 100,
       description: "Van Description",
       type: "simple",
+      hostId: "123",
     },
   });
   console.log(`Created van with id: ${newVan.id}`);

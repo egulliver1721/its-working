@@ -1,7 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams, Link } from "react-router-dom";
+
+const instance = axios.create({
+  baseURL: "http://localhost:8000",
+});
+
+type Van = {
+  id: number;
+  price: number;
+  name: string;
+  description: string;
+  type: string;
+  hostId: number;
+};
 
 const HostVanDetails = () => {
-  return <p> back to vans</p>;
+  const { id } = useParams();
+  const [currentVan, setCurrentVan] = useState<Van>({
+    id: 0,
+    name: "",
+    description: "",
+    price: 0,
+    type: "",
+    hostId: 0,
+  });
+
+  useEffect(() => {
+    instance
+      .get(`api/host/vans/${id}`)
+      .then((response) => {
+        setCurrentVan(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
+  if (!currentVan) {
+    return <h1>loading...</h1>;
+  }
+
+  return (
+    <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+
+      <div className="host-van-detail-layout-container">
+        <div className="host-van-detail">
+          <div className="host-van-detail-info-text">
+            <i className={`van-type van-type-${currentVan.type}`}>
+              {currentVan.type}
+            </i>
+            <h3>{currentVan.name}</h3>
+            <h4>${currentVan.price}/day</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default HostVanDetails;

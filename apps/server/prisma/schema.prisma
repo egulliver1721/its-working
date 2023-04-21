@@ -23,5 +23,6 @@ model Van {
   price       Int
   description String
   type        String
+  hostId      Int
 }
 

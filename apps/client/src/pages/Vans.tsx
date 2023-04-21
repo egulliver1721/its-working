@@ -18,6 +18,7 @@ type Vans = {
   name: string;
   description: string;
   type: string;
+  hostId: number;
 };
 
 const Vans = () => {
@@ -49,6 +50,5 @@ const Vans = () => {
     </div>
   );
 };
-
 
 export default Vans;

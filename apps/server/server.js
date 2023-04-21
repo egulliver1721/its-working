@@ -29,16 +29,26 @@ app.get("/api/vans/:id", async (req, res) => {
   res.send(data);
 });
 
-// app.get("/api/vans/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const data = await prisma.van.findUnique({
-//     where: {
-//       id: parseInt(id),
-//     },
-//   });
-//   console.log(data);
-//   res.send(data);
-// });
+app.get("/api/host/vans", async (req, res) => {
+  const data = await prisma.van.findMany({
+    where: {
+      hostId: 123,
+    },
+  });
+  console.log(data);
+  res.send(data);
+});
+
+app.get("/api/host/vans/:id", async (req, res) => {
+  const { id } = req.params;
+  const data = await prisma.van.findUnique({
+    where: {
+      id: parseInt(id),
+    },
+  });
+  console.log(data);
+  res.send(data);
+});
 
 app.get("/", (req, res) => {
   res.send("hello world");
