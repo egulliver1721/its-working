@@ -14,20 +14,38 @@ const Header = () => {
         <NavLink to="/">#VANLIFE</NavLink>
         <nav>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : null)}
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
             to="/host"
           >
             Host
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : null)}
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
             to="/about"
           >
             {" "}
             About
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : null)}
+            style={({
+              isActive,
+            }: {
+              isActive: boolean;
+            }): React.CSSProperties | undefined =>
+              isActive ? activeStyle : undefined
+            }
             to="/vans"
           >
             Vans
