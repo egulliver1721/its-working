@@ -16,13 +16,12 @@ model Star {
   constellation String   @db.VarChar(255)
 }
 
-
 model Van {
-  id          Int    @id @default(autoincrement())
-  name        String
+  id          Int     @id @default(autoincrement())
   price       Int
-  description String
-  type        String
-  hostId      Int
+  name        String  @db.VarChar(255)
+  description String? @db.VarChar(1000)
+  type        String  @db.VarChar(255)
+  hostId      Int?
+  ImageUrl    String? @db.VarChar(255)
 }
-

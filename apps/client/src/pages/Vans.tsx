@@ -19,6 +19,7 @@ type Vans = {
   description: string;
   type: string;
   hostId: number;
+  ImageUrl: string;
 };
 
 const Vans = () => {
@@ -31,6 +32,7 @@ const Vans = () => {
   const vanElements = vans.map((van) => (
     <div key={van.id} className="van-tile">
       <Link to={`/vans/${van.id}`}>
+        <img src={van.ImageUrl} />
         <div className="van-info">
           <h3>{van.name}</h3>
           <p>

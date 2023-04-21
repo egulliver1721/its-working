@@ -13,6 +13,7 @@ type Van = {
   description: string;
   type: string;
   hostId: number;
+  ImageUrl: "";
 };
 
 const HostVanDetails = () => {
@@ -29,6 +30,7 @@ const HostVanDetails = () => {
     price: 0,
     type: "",
     hostId: 0,
+    ImageUrl: "",
   });
 
   useEffect(() => {
@@ -54,6 +56,7 @@ const HostVanDetails = () => {
 
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
+          <img src={currentVan.ImageUrl} />
           <div className="host-van-detail-info-text">
             <i className={`van-type van-type-${currentVan.type}`}>
               {currentVan.type}

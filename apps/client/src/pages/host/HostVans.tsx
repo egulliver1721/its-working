@@ -19,6 +19,7 @@ type Vans = {
   description: string;
   type: string;
   hostId: number;
+  ImageUrl: "";
 };
 
 const HostVans = () => {
@@ -35,6 +36,7 @@ const HostVans = () => {
       className="host-van-link-wrapper"
     >
       <div className="host-van-single">
+        <img src={van.ImageUrl} />
         <div className="host-van-info">
           <h3>{van.name}</h3>
           <p>${van.price}/day</p>

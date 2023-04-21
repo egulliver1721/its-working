@@ -13,6 +13,7 @@ type Vans = {
   description: string;
   price: string;
   type: string;
+  ImageUrl: string;
 };
 
 const VanDetails = () => {
@@ -23,6 +24,7 @@ const VanDetails = () => {
     description: "",
     price: "",
     type: "",
+    ImageUrl: "",
   });
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const VanDetails = () => {
       .get(`api/vans/${id}`)
       .then((response) => {
         setVan(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -40,6 +43,7 @@ const VanDetails = () => {
     <div className="van-detail-container">
       {van ? (
         <div className="van-detail">
+          <img src={van.ImageUrl} />
           <i className={`van-type ${van.type} selected`}>{van.type}</i>
           <h2>{van.name}</h2>
           <p className="van-price">
