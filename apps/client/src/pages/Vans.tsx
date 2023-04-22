@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const instance = axios.create({
@@ -23,13 +23,21 @@ type Vans = {
 };
 
 const Vans = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState<Vans[]>([]);
 
   useEffect(() => {
     getVans().then((vans) => setVans(vans));
   }, []);
 
-  const vanElements = vans.map((van) => (
+  const typeFilter = searchParams.get("type");
+  console.log(typeFilter);
+
+  const displayedVans = typeFilter
+    ? vans.filter((van) => van.type.toLowerCase() === typeFilter)
+    : vans;
+
+  const vanElements = displayedVans.map((van) => (
     <div key={van.id} className="van-tile">
       <Link to={`/vans/${van.id}`}>
         <img src={van.ImageUrl} />
@@ -45,9 +53,44 @@ const Vans = () => {
     </div>
   ));
 
+  function handleFilterChange(key, value) {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  }
+
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
+      <button
+        className="van-type simple"
+        onClick={() => handleFilterChange("type", "simple")}
+      >
+        Simple
+      </button>
+      <button
+        className="van-type luxury"
+        onClick={() => handleFilterChange("type", "luxury")}
+      >
+        Luxury
+      </button>
+      <button
+        className="van-type rugged"
+        onClick={() => handleFilterChange("type", "rugged")}
+      >
+        Rugged
+      </button>
+      <button
+        className="van-type clear-filters"
+        onClick={() => handleFilterChange("type", null)}
+      >
+        Clear
+      </button>
       <div className="van-list">{vanElements}</div>
     </div>
   );
