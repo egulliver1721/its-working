@@ -85,12 +85,15 @@ const Vans = () => {
       >
         Rugged
       </button>
-      <button
-        className="van-type clear-filters"
-        onClick={() => handleFilterChange("type", null)}
-      >
-        Clear
-      </button>
+
+      {typeFilter && (
+        <button
+          className="van-type clear-filters"
+          onClick={() => handleFilterChange("type", null)}
+        >
+          Clear
+        </button>
+      )}
       <div className="van-list">{vanElements}</div>
     </div>
   );
