@@ -9,7 +9,8 @@
     "dev": "nodemon server",
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
