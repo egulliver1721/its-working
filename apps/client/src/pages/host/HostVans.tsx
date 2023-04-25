@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://its-working-api-git-routes-egulliver1721.vercel.app/",
+  baseURL: "http://localhost:8000/",
 });
 
 const getVans = async () => {
