@@ -94,7 +94,7 @@ const Vans = () => {
       {typeFilter && (
         <button
           className="van-type clear-filters"
-          onClick={() => handleFilterChange("type", null)}
+          onClick={() => handleFilterChange("type", "")}
         >
           Clear
         </button>
