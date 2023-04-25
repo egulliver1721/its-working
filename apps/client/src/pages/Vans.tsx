@@ -53,7 +53,7 @@ const Vans = () => {
     </div>
   ));
 
-  function handleFilterChange(key: string, value: string) {
+  function handleFilterChange(key: string, value: string | "") {
     setSearchParams((prevParams) => {
       if (value === null) {
         prevParams.delete(key);
