@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+   shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Star {
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  name          String   @db.VarChar(255)
+  constellation String   @db.VarChar(255)
+}
+
+model Van {
+  id          Int     @id @default(autoincrement())
+  price       Int
+  name        String  @db.VarChar(255)
+  description String? @db.VarChar(1000)
+  type        String  @db.VarChar(255)
+  hostId      Int?
+  ImageUrl    String? @db.VarChar(255)
+}

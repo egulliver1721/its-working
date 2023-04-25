@@ -6,10 +6,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node server",
     "dev": "nodemon server",
     "prisma:generate": "npx prisma generate",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "postinstall": "prisma generate",
+    "start": "node apps/api/server.js"
   },
   "keywords": [],
   "author": "",
