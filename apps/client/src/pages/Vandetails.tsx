@@ -43,7 +43,7 @@ const VanDetails = () => {
     <div className="van-detail-container">
       {van ? (
         <div className="van-detail">
-          <img src={van.ImageUrl} />
+          <img className="van-detail-image" src={van.ImageUrl} />
           <i className={`van-type ${van.type} selected`}>{van.type}</i>
           <h2>{van.name}</h2>
           <p className="van-price">
