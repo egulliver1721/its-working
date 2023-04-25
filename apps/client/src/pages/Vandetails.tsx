@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000/",
@@ -17,6 +17,7 @@ type Vans = {
 };
 
 const VanDetails = () => {
+  const location = useLocation();
   const { id } = useParams<Vans>();
   const [van, setVan] = useState<Vans>({
     id: "",
@@ -39,8 +40,13 @@ const VanDetails = () => {
       });
   }, [id]);
 
+  const search = location.state?.search || "";
+
   return (
     <div className="van-detail-container">
+      <Link to={`..${search}`} relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
       {van ? (
         <div className="van-detail">
           <img className="van-detail-image" src={van.ImageUrl} />
