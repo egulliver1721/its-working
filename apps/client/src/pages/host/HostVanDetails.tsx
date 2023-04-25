@@ -17,6 +17,7 @@ type Van = {
 };
 
 const HostVanDetails = () => {
+  const [loading, setLoading] = useState(false);
   const activeStyle: React.CSSProperties = {
     fontWeight: "bold",
     textDecoration: "underline",
@@ -34,18 +35,21 @@ const HostVanDetails = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     instance
       .get(`api/host/vans/${id}`)
       .then((response) => {
         setCurrentVan(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false);
       });
   }, [id]);
 
-  if (!currentVan) {
-    return <h1>loading...</h1>;
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
   return (

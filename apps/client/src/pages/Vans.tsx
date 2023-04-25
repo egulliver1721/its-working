@@ -25,9 +25,18 @@ type Vans = {
 const Vans = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState<Vans[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   getVans().then((vans) => setVans(vans));
+  // }, []);
 
   useEffect(() => {
-    getVans().then((vans) => setVans(vans));
+    setLoading(true);
+    getVans().then((vans) => {
+      setVans(vans);
+      setLoading(false);
+    });
   }, []);
 
   const typeFilter = searchParams.get("type");
@@ -39,7 +48,10 @@ const Vans = () => {
 
   const vanElements = displayedVans.map((van) => (
     <div key={van.id} className="van-tile">
-      <Link to={`${van.id}`} state={{ search: `?${searchParams.toString()}` }}>
+      <Link
+        to={`${van.id}`}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }}
+      >
         <img src={van.ImageUrl} />
         <div className="van-info">
           <h3>{van.name}</h3>
@@ -62,6 +74,10 @@ const Vans = () => {
       }
       return prevParams;
     });
+  }
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
