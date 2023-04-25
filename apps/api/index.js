@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 // middleware
 app.use(
   cors({
-    origin: "its-working-up87-git-routes-egulliver1721.vercel.app",
+    origin: "https://its-working-client-git-routes-egulliver1721.vercel.app",
     credentials: true,
   })
 );

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 
 const instance = axios.create({
-  baseURL: "its-working-git-routes-egulliver1721.vercel.app",
+  baseURL: "https://its-working-api-git-routes-egulliver1721.vercel.app",
 });
 
 type Van = {
